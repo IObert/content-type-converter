@@ -1,0 +1,13 @@
+###
+POST http://localhost:3000/form-to-json
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text2"
+
+title2
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

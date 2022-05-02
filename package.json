@@ -1,0 +1,38 @@
+{
+  "name": "content-type-converter",
+  "version": "1.0.0",
+  "description": "Converts form-to-json",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "yarn clear && tsc",
+    "start": "node dist/server.js",
+    "clear": "shx rm -rf dist",
+    "dev:server:tsc": "yarn clear && tsc -w --preserveWatchOutput",
+    "dev:server:watch": "nodemon -r dotenv/config -w dist/ dist/server.js",
+    "dev:server": "concurrently -k -p \"[{name}]\" -n \"Transpiler,Server\" -c \"yellow.bold,cyan.bold\" \"yarn dev:server:tsc\" \"yarn dev:server:watch\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IObert/content-type-converter.git"
+  },
+  "author": "Marius Obert",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IObert/content-type-converter/issues"
+  },
+  "homepage": "https://github.com/IObert/content-type-converter#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "concurrently": "^7.0.0",
+    "dotenv": "^16.0.0",
+    "fastify-tsconfig": "^1.0.1",
+    "nodemon": "^2.0.15",
+    "shx": "^0.3.4",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "fastify": "^3.27.4",
+    "fastify-multipart": "^5.3.1"
+  }
+}
