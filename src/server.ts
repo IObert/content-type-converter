@@ -8,23 +8,31 @@ if (!process.env.FORWARD_TO) {
   console.error('Couldn\'t find config parameter "process.env.FORWARD_TO".');
   process.exit(0);
 }
-process.env.FORWARD_TO = process.env.FORWARD_TO || "";
+// process.env.FORWARD_TO = process.env.FORWARD_TO || "";
 
 server
   .register(fastifyMultipart, { addToBody: true })
-  .all("/form-to-json", async (request, reply) => {
-    console.log("Incoming ...");
+  .all("/", async (request, reply) => {
+    reply.send(
+      `I'm a generic web service that proxies all requests to ${process.env.FORWARD_TO}.\n In transit, I convert the "Content-Type: multipart/form-data" to "Content-Type: application/json".`
+    );
+  })
+  .all("/:route", async (request, reply) => {
+    const verb = request.method.toLowerCase();
+    // @ts-ignore save route from wildcard
+    const route = `/${request.params.route}`;
 
-    axios
-      .post(process.env.FORWARD_TO || "", request.body)
-      .then(function (proxyResponse) {
+    console.log(`Incoming ${verb}-request to ${route} ...`);
+    // @ts-ignore axios supports all possible HTTP verbs
+    axios[verb](`${process.env.FORWARD_TO}${route}`, request.body)
+      .then(function (proxyResponse: any) {
         console.log("... Outgoing");
         reply.code(proxyResponse.status);
         reply.headers(proxyResponse.headers);
         reply.send(`${proxyResponse.data}`);
       })
-      .catch(function (error) {
-        console.log("... error");
+      .catch(function (error: any) {
+        console.error("... error", error.response.status, error.response.data);
         reply.code(error.response.status);
         reply.headers(error.response.headers);
         reply.send(`${error.response.data}`);
