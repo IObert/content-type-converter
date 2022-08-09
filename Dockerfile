@@ -4,6 +4,7 @@ WORKDIR /usr
 
 COPY package.json ./
 COPY tsconfig.json ./
+COPY src ./src
 
 RUN yarn
 RUN yarn build
