@@ -1,11 +1,12 @@
 {
   "name": "content-type-converter",
   "version": "1.0.0",
-  "description": "Converts form-to-json",
+  "description": "Proxies requests and converts `Content-Type: multipart/form-data` to `Content-Type: application/json`",
   "main": "dist/server.js",
   "scripts": {
     "build": "yarn clear && tsc",
-    "start": "node dist/server.js",
+    "debug": "yarn build && node -r dotenv/config dist/server.js",
+    "start": "node  dist/server.js",
     "clear": "shx rm -rf dist",
     "dev:server:tsc": "yarn clear && tsc -w --preserveWatchOutput",
     "dev:server:watch": "nodemon -r dotenv/config -w dist/ dist/server.js",
@@ -22,17 +23,17 @@
   },
   "homepage": "https://github.com/IObert/content-type-converter#readme",
   "devDependencies": {
-    "@types/node": "^17.0.21",
-    "concurrently": "^7.0.0",
-    "dotenv": "^16.0.0",
+    "@types/node": "^18.6.5",
+    "concurrently": "^7.3.0",
+    "dotenv": "^16.0.1",
     "fastify-tsconfig": "^1.0.1",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.19",
     "shx": "^0.3.4",
-    "typescript": "^4.6.2"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "fastify": "^3.27.4",
-    "fastify-multipart": "^5.3.1"
+    "fastify": "^4.4.0",
+    "fastify-multipart": "^5.4.0"
   }
 }

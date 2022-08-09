@@ -11,3 +11,18 @@ Content-Disposition: form-data; name="text2"
 
 title2
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+POST http://localhost:3000/receive_email
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="subject"
+
+Magic Marius
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+Magic Ignored Line
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
