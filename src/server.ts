@@ -1,6 +1,6 @@
 import fastify, { FastifyInstance } from "fastify";
 import axios from "axios";
-import fastifyMultipart from "fastify-multipart";
+import fastifyMultipart from "@fastify/multipart";
 
 const server: FastifyInstance = fastify({});
 
@@ -26,7 +26,7 @@ server
     // @ts-ignore axios supports all possible HTTP verbs
     axios[verb](`${process.env.FORWARD_TO}${route}`, request.body)
       .then(function (proxyResponse: any) {
-        console.log("... Outgoing");
+        console.log(`... Outgoing ${proxyResponse.data}`);
         reply.code(proxyResponse.status);
         reply.headers(proxyResponse.headers);
         reply.send(`${proxyResponse.data}`);
