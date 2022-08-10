@@ -42,10 +42,10 @@ server
 // Run the server!
 (async () => {
   try {
-    const address = await server.listen({ 
+    const address = await server.listen({
       port: 8080,
-      host: "0.0.0.0" // this line is needed for docker https://github.com/fastify/fastify/issues/935
-     });
+      host: "0.0.0.0", // this line is needed for docker https://github.com/fastify/fastify/issues/935
+    });
     console.log(
       `Restarted at: ${address} and will forward requests to ${process.env.FORWARD_TO}`
     );

@@ -9,5 +9,5 @@
     "target": "es2018",
     "lib": ["es2018"]
   },
-  "include": ["src/**/*.ts","src/**/*.html"]
+  "include": ["src/**/*.ts", "src/**/*.html"]
 }

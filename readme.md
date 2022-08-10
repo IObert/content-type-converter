@@ -9,11 +9,12 @@ You can adjust the target host via the environment variable `FORWARD_TO`.
 ## Getting Stated
 
 The simplest way to use this app, is to clone and run it locally:
+
 ```Bash
 git clone https://github.com/IObert/content-type-converter
 cd content-type-converter
 npm install
-npm build 
+npm build
 FORWARD_TO=https://<target-host.com> node dist/server.js
 ```
 
