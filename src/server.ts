@@ -39,12 +39,15 @@ server
       });
   });
 
-server.listen(3000, function (err, address) {
-  if (err) {
+// Run the server!
+(async () => {
+  try {
+    const address = await server.listen({ port: 3000 });
+    console.log(
+      `Restarted at: ${address} and will forward requests to ${process.env.FORWARD_TO}`
+    );
+  } catch (err) {
     server.log.error(err);
     process.exit(1);
   }
-  console.log(
-    `Restarted at: ${address} and will forward requests to ${process.env.FORWARD_TO}`
-  );
-});
+})();
