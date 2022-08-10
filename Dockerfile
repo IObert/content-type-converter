@@ -9,7 +9,5 @@ COPY src ./src
 RUN yarn
 RUN yarn build
 
-COPY dist ./dist
-
 EXPOSE 8080
 CMD ["yarn","start"]
