@@ -42,7 +42,10 @@ server
 // Run the server!
 (async () => {
   try {
-    const address = await server.listen({ port: 8080 });
+    const address = await server.listen({ 
+      port: 8080,
+      host: "0.0.0.0"
+     });
     console.log(
       `Restarted at: ${address} and will forward requests to ${process.env.FORWARD_TO}`
     );
