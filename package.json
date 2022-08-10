@@ -6,7 +6,7 @@
   "scripts": {
     "build": "yarn clear && tsc",
     "debug": "yarn build && node -r dotenv/config dist/server.js",
-    "start": "node  dist/server.js",
+    "start": "node dist/server.js",
     "clear": "shx rm -rf dist",
     "dev:server:tsc": "yarn clear && tsc -w --preserveWatchOutput",
     "dev:server:watch": "nodemon -r dotenv/config -w dist/ dist/server.js",

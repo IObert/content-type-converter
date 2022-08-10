@@ -9,5 +9,5 @@ COPY src ./src
 RUN yarn
 RUN yarn build
 
-EXPOSE 3000
+EXPOSE 8080
 CMD ["yarn","start"]
