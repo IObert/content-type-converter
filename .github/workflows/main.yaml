@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: iobert/content-type-converted
+  IMAGE_NAME: iobert/content-type-converter
 
 jobs:
   build-and-push-image:
