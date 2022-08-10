@@ -12,7 +12,7 @@ if (!process.env.FORWARD_TO) {
 
 server
   .register(fastifyMultipart, { addToBody: true })
-  .all("/", async (request, reply) => {
+  .all("/", async (_, reply) => {
     reply.send(
       `I'm a generic web service that proxies all requests to ${process.env.FORWARD_TO}.\n In transit, I convert the "Content-Type: multipart/form-data" to "Content-Type: application/json".`
     );
@@ -44,7 +44,7 @@ server
   try {
     const address = await server.listen({ 
       port: 8080,
-      host: "0.0.0.0"
+      host: "0.0.0.0" // this line is needed for docker https://github.com/fastify/fastify/issues/935
      });
     console.log(
       `Restarted at: ${address} and will forward requests to ${process.env.FORWARD_TO}`
