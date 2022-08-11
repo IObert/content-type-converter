@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-type-converter
+  namespace: basic
+  labels:
+    app: content-type-converter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: content-type-converter
+  template:
+    metadata:
+      labels:
+        app: content-type-converter
+    spec:
+      containers:
+        - image: ghcr.io/iobert/content-type-converter:main
+          name: content-type-converter
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 50m
+            limits:
+              memory: 128Mi
+              cpu: 100m
+          ports:
+            - containerPort: 8080
+          env:
+            - name: FORWARD_TO
+              value: https://magic-demo-8232-dev.twil.io
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: content-type-converter
+  name: content-type-converter
+spec:
+  selector:
+    app: content-type-converter
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  labels:
+    app: content-type-converter
+  name: content-type-converter
+spec:
+  gateway: kyma-system/kyma-gateway
+  service:
+    name: content-type-converter
+    port: 8080
+    host: ctc.f1a34df.kyma.shoot.live.k8s-hana.ondemand.com
+  rules:
+    - accessStrategies:
+        - config: {}
+          handler: allow
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - HEAD
+      path: /.*
