@@ -1,9 +1,11 @@
+TODO: Adapt namespace and host of API rule
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: content-type-converter
-  namespace: basic
+  namespace: content-type-converter
   labels:
     app: content-type-converter
 spec:
@@ -30,7 +32,7 @@ spec:
             - containerPort: 8080
           env:
             - name: FORWARD_TO
-              value: https://magic-demo-8232-dev.twil.io
+              value: https://magic-demo-2851-dev.twil.io
 
 ---
 apiVersion: v1
@@ -59,7 +61,7 @@ spec:
   service:
     name: content-type-converter
     port: 8080
-    host: ctc.f1a34df.kyma.shoot.live.k8s-hana.ondemand.com
+    host: ctc.c-32abea2.kyma.ondemand.com
   rules:
     - accessStrategies:
         - config: {}
